@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% block title %} The main page {% endblock %} {%
+block head %}
+<style>
+  table {
+    width: 70%;
+    border-collapse: collapse;
+  }
+  .index-con{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  td{
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  td a{
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+  }
+
+  .add{
+    border-radius: 50%;
+  }
+</style>
+
+{% endblock %} {% block body %}
+
+<div class="index-con">
+  <table>
+    {% for base in bases %}
+    <tr>
+      <td>{{base.base_name}}</td>
+      <td><a href="/edit/{{base.base_id}}">Update</a></td>
+      <td><a href="/remove/{{base.base_id}}">Delete</a></td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <td></td>
+      <td>
+        <a href="/new" class="add"><i class="fa-solid fa-plus "></i></a>
+      </td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+
+{% endblock %}

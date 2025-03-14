@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Edit{% endblock %}{% block body %}
+
+
+<div>
+  <form action="/edit/{{ base.base_id }}" method="POST">
+    <label for="category">Category:</label>
+    <input
+      type="text"
+      name="category"
+      id="category"
+      placeholder="Category..."
+      value="{{ base.base_name }}"
+      required
+    />
+
+    {% for i in range(keys|length) %}
+    <div class="section">
+      <input type="text" name="key{{ i }}" value="{{ keys[i].keyname }}" placeholder="Key name..." required />
+      <input type="text" name="value{{ i }}" value="{{ keys[i].key }}" placeholder="Key value..." required />
+    </div>
+    {% endfor %}
+
+    <button type="button" onclick="newsec(event)">Add</button>
+    <input type="submit" value="Save Changes" />
+  </form>
+</div>
+
+<script>
+  const newsec = (e) => {
+    e.preventDefault();
+
+    const form = document.querySelector("form");
+    const section = document.createElement("div");
+    section.classList.add("section");
+
+    const index = document.querySelectorAll(".section").length;
+
+    const keyInput = document.createElement("input");
+    keyInput.type = "text";
+    keyInput.name = `key${index}`;
+    keyInput.placeholder = "Key name...";
+    keyInput.required = true;
+
+    const valueInput = document.createElement("input");
+    valueInput.type = "text";
+    valueInput.name = `value${index}`;
+    valueInput.placeholder = "Key value...";
+    valueInput.required = true;
+
+    section.appendChild(keyInput);
+    section.appendChild(valueInput);
+
+    form.insertBefore(section, document.querySelector("button"));
+  };
+</script>
+
+{% endblock %}

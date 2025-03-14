@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+{% block title %}Export{% endblock %} 
+
+{% block body %}
+<h2>Export</h2>
+<p>Export your keys to a file</p>
+
+<form action="/export" method="post">
+  <div>
+    {% for base in bases %}
+    <label>
+      <input type="checkbox" name="base" value="{{ base.base_id }}" />
+      {{ base.base_name }}
+    </label>
+    {% endfor %}
+  </div>
+
+  <div>
+    <label><input type="radio" name="prefix" value="none" checked /> No prefix</label>
+    <label><input type="radio" name="prefix" value="react" /> React</label>
+    <label><input type="radio" name="prefix" value="vite" /> Vite</label>
+  </div>
+
+  <input type="submit" value="Export" />
+</form>
+{% endblock %}

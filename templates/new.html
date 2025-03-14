@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Add New{% endblock %}
+{% block body %}
+
+<div>
+  <form action="/new" method="post">
+    <label for="category">Category:</label>
+    <input
+      type="text"
+      name="category"
+      id="category"
+      placeholder="Category..."
+      required
+    />
+
+    <div class="section">
+      <input
+        type="text"
+        name="key0"
+        placeholder="Key name..."
+        required
+      />
+      <input
+        type="text"
+        name="value0"
+        placeholder="Key value..."
+        required
+      />
+    </div>
+
+    <button type="button" onclick="newsec(event)">Add</button>
+    <input type="submit" value="Submit" />
+  </form>
+</div>
+
+<script>
+  const newsec = (e) => {
+    e.preventDefault();
+
+    const form = document.querySelector("form");
+    const section = document.createElement("div");
+    section.classList.add("section");
+
+    const index = document.querySelectorAll(".section").length;
+
+    const keyInput = document.createElement("input");
+    keyInput.type = "text";
+    keyInput.name = `key${index}`;
+    keyInput.placeholder = "Key name...";
+    keyInput.required = true;
+
+    const valueInput = document.createElement("input");
+    valueInput.type = "text";
+    valueInput.name = `value${index}`;
+    valueInput.placeholder = "Key value...";
+    valueInput.required = true;
+
+    section.appendChild(keyInput);
+    section.appendChild(valueInput);
+
+    form.insertBefore(section, document.querySelector("button"));
+  };
+</script>
+
+{% endblock %}
