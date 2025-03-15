@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from database import db, User, KeyBase, Keys
+from ourmail import send_mail
 import os
 from dotenv import load_dotenv
 
@@ -61,12 +62,16 @@ def register():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('home'))
 
 @app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/home')
 @login_required
 def index():
-    return render_template('index.html', bases=KeyBase.query.filter_by(user_id=current_user.id).all())
+    return render_template('home.html', bases=KeyBase.query.filter_by(user_id=current_user.id).all())
 
 @app.route('/new', methods=['GET', 'POST'])
 @login_required
@@ -147,6 +152,52 @@ def edit(base_id):
         return redirect(url_for('index'))
         
     return render_template('edit.html', base=base, keys=keys)
+
+@app.route('/export', methods=['GET', 'POST'])
+@login_required
+def export():
+    bases = KeyBase.query.filter_by(user_id=current_user.id).all()
+
+    if request.method == 'POST':
+        selected_bases = request.form.getlist('base')  
+        prefix = request.form.get('prefix', '') 
+        keys = Keys.query.filter(Keys.base_id.in_(selected_bases)).all()
+        formatted_keys = []
+        for key in keys:
+            keyname = key.keyname.upper()
+            if prefix == "react":
+                keyname = f"REACT_APP_{keyname}"
+            elif prefix == "vite":
+                keyname = f"VITE_{keyname}"
+            formatted_keys.append(f"{keyname}={key.key}")
+        env_content = "\n".join(formatted_keys)
+        return Response(
+            env_content,
+            mimetype="text/plain",
+            headers={"Content-Disposition": "attachment; filename=.env"}
+        )
+
+    return render_template('export.html', bases=bases)
+
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
+
+@app.route('/terms')
+def terms():
+    return render_template('terms.html')
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method=='POST':
+        name = request.form['user-name']
+        email = request.form['email']
+        phone_number = request.form['ph-no']
+        subject = request.form['subject']  
+        message = request.form['message']
+        send_mail(name, email, phone_number, subject, message)
+        return redirect(url_for('index'))
+    return render_template('contact.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

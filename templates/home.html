@@ -1,0 +1,46 @@
+{% extends 'base.html' %} 
+{% block title %} The Main Page {% endblock %} 
+
+{% block head %} 
+{% endblock %} 
+
+{% block body %}
+
+<div class="container mt-4">
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      
+      <tbody>
+        {% for base in bases %}
+        <tr>
+          <td>
+            <i class="fa-solid fa-database"></i> {{ base.base_name }}
+          </td>
+          <td>
+            <a href="/edit/{{ base.base_id }}" class="btn btn-warning btn-sm">
+              <i class="fa-solid fa-pen"></i> Edit
+            </a>
+          </td>
+          <td>
+            <a href="/remove/{{ base.base_id }}" class="btn btn-danger btn-sm">
+              <i class="fa-solid fa-trash"></i> Delete
+            </a>
+          </td>
+        </tr>
+        
+        {% endfor %}
+        <tr>
+          <td></td>
+          <td class="text-center">
+            <a href="/new" class="btn btn-success btn-sm">
+              <i class="fa-solid fa-plus"></i> Add
+            </a>
+          </td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,29 +1,69 @@
 {% extends 'base.html' %}
-{% block title %}Edit{% endblock %}{% block body %}
+{% block title %}Edit{% endblock %}
 
+{% block body %}
 
-<div>
-  <form action="/edit/{{ base.base_id }}" method="POST">
-    <label for="category">Category:</label>
-    <input
-      type="text"
-      name="category"
-      id="category"
-      placeholder="Category..."
-      value="{{ base.base_name }}"
-      required
-    />
+<div class="container mt-4">
+  <div class="d-flex align-items-center mb-3">
+    <a href="javascript:history.back()" class="text-decoration-none text-dark">
+      <i class="fa-solid fa-arrow-left fs-4"></i>
+    </a>
+    <h2 class="text-primary ms-3 mb-0">Edit Category</h2>
+  </div>
 
-    {% for i in range(keys|length) %}
-    <div class="section">
-      <input type="text" name="key{{ i }}" value="{{ keys[i].keyname }}" placeholder="Key name..." required />
-      <input type="text" name="value{{ i }}" value="{{ keys[i].key }}" placeholder="Key value..." required />
-    </div>
-    {% endfor %}
+  <div class="card p-4 shadow">
+    <form action="/edit/{{ base.base_id }}" method="POST">
+      <div class="mb-3">
+        <label for="category" class="form-label fw-bold">Category:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="category"
+          id="category"
+          placeholder="Category..."
+          value="{{ base.base_name }}"
+          required
+        />
+      </div>
 
-    <button type="button" onclick="newsec(event)">Add</button>
-    <input type="submit" value="Save Changes" />
-  </form>
+      <div class="row fw-bold border-bottom pb-2 mb-3">
+        <div class="col">Key</div>
+        <div class="col">Value</div>
+      </div>
+
+      {% for i in range(keys|length) %}
+      <div class="row mb-2 section">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            name="key{{ i }}"
+            value="{{ keys[i].keyname }}"
+            placeholder="Key name..."
+            required
+          />
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            name="value{{ i }}"
+            value="{{ keys[i].key }}"
+            placeholder="Key value..."
+            required
+          />
+        </div>
+      </div>
+      {% endfor %}
+
+      <div class="d-flex gap-2 mt-3">
+        <button type="button" class="btn btn-outline-primary" onclick="newsec(event)">
+          <i class="fa fa-plus"></i> Add
+        </button>
+        <input type="submit" class="btn btn-primary" value="Save Changes" />
+      </div>
+    </form>
+  </div>
 </div>
 
 <script>
@@ -32,26 +72,34 @@
 
     const form = document.querySelector("form");
     const section = document.createElement("div");
-    section.classList.add("section");
+    section.classList.add("row", "mb-2", "section");
 
     const index = document.querySelectorAll(".section").length;
 
+    const keyDiv = document.createElement("div");
+    keyDiv.classList.add("col");
     const keyInput = document.createElement("input");
     keyInput.type = "text";
+    keyInput.classList.add("form-control");
     keyInput.name = `key${index}`;
     keyInput.placeholder = "Key name...";
     keyInput.required = true;
+    keyDiv.appendChild(keyInput);
 
+    const valueDiv = document.createElement("div");
+    valueDiv.classList.add("col");
     const valueInput = document.createElement("input");
     valueInput.type = "text";
+    valueInput.classList.add("form-control");
     valueInput.name = `value${index}`;
     valueInput.placeholder = "Key value...";
     valueInput.required = true;
+    valueDiv.appendChild(valueInput);
 
-    section.appendChild(keyInput);
-    section.appendChild(valueInput);
+    section.appendChild(keyDiv);
+    section.appendChild(valueDiv);
 
-    form.insertBefore(section, document.querySelector("button"));
+    form.insertBefore(section, document.querySelector(".d-flex"));
   };
 </script>
 

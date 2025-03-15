@@ -1,64 +1,99 @@
 {% extends 'base.html' %}
-{% block title %}Add New{% endblock %}
+{% block title %} Add New {% endblock %}
+
 {% block body %}
 
-<div>
-  <form action="/new" method="post">
-    <label for="category">Category:</label>
-    <input
-      type="text"
-      name="category"
-      id="category"
-      placeholder="Category..."
-      required
-    />
+<div class="container mt-4">
+  <div class="d-flex align-items-center mb-3">
+    <a href="javascript:history.back()" class="text-decoration-none text-dark">
+      <i class="fa-solid fa-arrow-left fs-4"></i>
+    </a>
+    <h3 class="text-primary ms-3 mb-0">Add New Entry</h3>
+  </div>
 
-    <div class="section">
-      <input
-        type="text"
-        name="key0"
-        placeholder="Key name..."
-        required
-      />
-      <input
-        type="text"
-        name="value0"
-        placeholder="Key value..."
-        required
-      />
-    </div>
+  <div class="card p-4 shadow-sm">
+    <form action="/new" method="post">
+      <div class="mb-3">
+        <label for="category" class="form-label fw-bold">Category:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="category"
+          id="category"
+          placeholder="Enter category..."
+          required
+        />
+      </div>
 
-    <button type="button" onclick="newsec(event)">Add</button>
-    <input type="submit" value="Submit" />
-  </form>
+      <div id="keyValueContainer">
+        <div class="row mb-3 section">
+          <div class="col-md-6">
+            <input
+              type="text"
+              class="form-control"
+              name="key0"
+              placeholder="Key name..."
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <input
+              type="text"
+              class="form-control"
+              name="value0"
+              placeholder="Key value..."
+              required
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-success" onclick="newsec(event)">
+          <i class="fa-solid fa-plus"></i> Add More
+        </button>
+        <input type="submit" class="btn btn-primary" value="Submit" />
+      </div>
+    </form>
+  </div>
 </div>
 
 <script>
   const newsec = (e) => {
     e.preventDefault();
 
-    const form = document.querySelector("form");
-    const section = document.createElement("div");
-    section.classList.add("section");
-
+    const container = document.getElementById("keyValueContainer");
     const index = document.querySelectorAll(".section").length;
+
+    const section = document.createElement("div");
+    section.classList.add("row", "mb-3", "section");
 
     const keyInput = document.createElement("input");
     keyInput.type = "text";
+    keyInput.classList.add("form-control");
     keyInput.name = `key${index}`;
     keyInput.placeholder = "Key name...";
     keyInput.required = true;
 
     const valueInput = document.createElement("input");
     valueInput.type = "text";
+    valueInput.classList.add("form-control");
     valueInput.name = `value${index}`;
     valueInput.placeholder = "Key value...";
     valueInput.required = true;
 
-    section.appendChild(keyInput);
-    section.appendChild(valueInput);
+    const keyCol = document.createElement("div");
+    keyCol.classList.add("col-md-6");
+    keyCol.appendChild(keyInput);
 
-    form.insertBefore(section, document.querySelector("button"));
+    const valueCol = document.createElement("div");
+    valueCol.classList.add("col-md-6");
+    valueCol.appendChild(valueInput);
+
+    section.appendChild(keyCol);
+    section.appendChild(valueCol);
+
+    container.appendChild(section);
   };
 </script>
 
