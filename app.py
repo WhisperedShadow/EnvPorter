@@ -182,9 +182,9 @@ def export():
             keyname = key.keyname.upper()
             keyname=keyname.replace(" ", "_")
             if prefix == "react":
-                keyname = f"REACT_APP_{keyname}"
+                keyname = f"REACT_APP_{KeyBase.query.filter_by(base_id=key.base_id).base_name.upper()}_{keyname}"
             elif prefix == "vite":
-                keyname = f"VITE_{keyname}"
+                keyname = f"VITE_{KeyBase.query.filter_by(base_id=key.base_id).base_name.upper()}_{keyname}"
             formatted_keys.append(f"{keyname}={key.key}")
         env_content = "\n".join(formatted_keys)
         return Response(
