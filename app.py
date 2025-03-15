@@ -199,5 +199,23 @@ def contact():
         return redirect(url_for('index'))
     return render_template('contact.html')
 
+from flask import Response
+from urllib.parse import urljoin
+
+@app.route('/sitemap.xml')
+def sitemap():
+    base_url = request.host_url
+    pages = [
+        '', 'home', 'login', 'register', 'new', 'export', 
+        'privacy', 'terms', 'contact'
+    ]
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    for page in pages:
+        xml += f"  <url>\n    <loc>{urljoin(base_url, page)}</loc>\n  </url>\n"
+    xml += '</urlset>'
+    return Response(xml, mimetype='application/xml')
+
+
 if __name__ == '__main__':
     app.run(debug=True)

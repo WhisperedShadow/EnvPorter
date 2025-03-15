@@ -1,120 +1,144 @@
-{% extends 'base.html' %}
-
-{% block title %}EnvPorter - Securely Store and Export Your API Keys{% endblock %}
-
-{% block head %}
+{% extends 'base.html' %} {% block title %}EnvPorter - Securely Store and Export
+Your API Keys{% endblock %} {% block head %}
+<meta
+  name="keywords"
+  content="EnvPorter, environment variables, .env files, export env, manage env, env manager, dotenv, config management, env exporter, env file generator, env file manager, API keys manager, secrets manager, .env editor, environment config, secure env storage, key-value storage, app configuration, config files, env setup, env automation, env deployment, project environment, development tools, backend config, frontend config, server environment, cloud config, devops tools, env loader, env viewer, dotenv generator, environment security, secure API keys, .env syntax, .env encryption, node env, react env, vite env, next.js env, express env, flask env, django env, laravel env, ruby env, php env, python env, JavaScript env, TypeScript env, kubernetes env, docker env, CI/CD env, cloud env, AWS env, Google Cloud env, Azure env, Heroku env, Netlify env, Vercel env, Firebase env, digitalocean env, cloudflare env, railway env, render env, Supabase env, env validation, env parser, env transformer, JSON to env, YAML to env, env backup, env versioning, import env, export .env, sync env, share env, team environment, env collaboration, workspace env, cloud-based env, multi-platform env, universal env manager, developer tools, coding productivity, software configuration, automation tools, API secrets, credentials manager, key rotation, configuration assistant, SaaS config manager, microservices env, system variables, shell environment, command-line env, local environment, staging environment, production environment, software deployment, software development tools, full-stack environment manager, project config, easy env management, secure environment variables"
+/>
+<meta
+  name="description"
+  content="EnvPorter helps you securely store and export your API keys as .env files for different technologies. Manage your environment variables with ease and privacy."
+/>
 <style>
-    .hero {
-        background: linear-gradient(to right, #08203e, #557c93);
-        color: white;
-        padding: 80px 0;
-    }
-    .feature-icon {
-        font-size: 40px;
-        color: #557c93;
-    }
-    .how-icon {
-        font-size: 35px;
-        color: #08203e;
-    }
-    footer {
-        background-color: #08203e;
-        color: white;
-        padding: 20px 0;
-        text-align: center;
-    }
-    footer a {
-        color: #ffd700;
-        text-decoration: none;
-        font-weight: bold;
-    }
-    footer a:hover {
-        text-decoration: underline;
-    }
+  .hero {
+    background: linear-gradient(to right, #08203e, #557c93);
+    color: white;
+    padding: 80px 0;
+  }
+  .feature-icon {
+    font-size: 40px;
+    color: #557c93;
+  }
+  .how-icon {
+    font-size: 35px;
+    color: #08203e;
+  }
+  footer {
+    background-color: #08203e;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+  }
+  footer a {
+    color: #ffd700;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  footer a:hover {
+    text-decoration: underline;
+  }
 </style>
-{% endblock %}
-
-{% block body %}
+{% endblock %} {% block body %}
 
 <section class="hero text-center">
-    <div class="container">
-        <h1 class="display-4">Manage & Export Your API Keys with Ease</h1>
-        <p class="lead">Store your API keys securely and export them as .env files for different technologies.</p>
-        <a href="{{ '/home' if current_user.is_authenticated else '/register' }}" class="btn btn-light btn-lg mt-3">Get Started</a>
-    </div>
+  <div class="container">
+    <h1 class="display-4">Manage & Export Your API Keys with Ease</h1>
+    <p class="lead">
+      Store your API keys securely and export them as .env files for different
+      technologies.
+    </p>
+    <a
+      href="{{ '/home' if current_user.is_authenticated else '/register' }}"
+      class="btn btn-light btn-lg mt-3"
+      >Get Started</a
+    >
+  </div>
 </section>
 
 <section class="container text-center my-5">
-    <h2 class="mb-4">Why Choose EnvPorter?</h2>
-    <div class="row">
-        <div class="col-md-3">
-            <i class="fa-solid fa-lock feature-icon"></i>
-            <h4>Secure Storage</h4>
-            <p>Your API keys are encrypted and stored safely with industry-standard security measures.</p>
-        </div>
-        <div class="col-md-3">
-            <i class="fa-solid fa-file-export feature-icon"></i>
-            <h4>Easy Export</h4>
-            <p>Download your API keys as structured .env files for frameworks like React, Flask, and Node.js.</p>
-        </div>
-        <div class="col-md-3">
-            <i class="fa-solid fa-bolt feature-icon"></i>
-            <h4>Fast & Reliable</h4>
-            <p>Effortlessly manage and access your API keys anytime, anywhere with lightning-fast performance.</p>
-        </div>
-        <div class="col-md-3">
-            <i class="fa-solid fa-user-shield feature-icon"></i>
-            <h4>Privacy First</h4>
-            <p>Your data is private and never shared. Only you have access to your stored API keys.</p>
-        </div>
+  <h2 class="mb-4">Why Choose EnvPorter?</h2>
+  <div class="row">
+    <div class="col-md-3">
+      <i class="fa-solid fa-lock feature-icon"></i>
+      <h4>Secure Storage</h4>
+      <p>
+        Your API keys are encrypted and stored safely with industry-standard
+        security measures.
+      </p>
     </div>
+    <div class="col-md-3">
+      <i class="fa-solid fa-file-export feature-icon"></i>
+      <h4>Easy Export</h4>
+      <p>
+        Download your API keys as structured .env files for frameworks like
+        React, Flask, and Node.js.
+      </p>
+    </div>
+    <div class="col-md-3">
+      <i class="fa-solid fa-bolt feature-icon"></i>
+      <h4>Fast & Reliable</h4>
+      <p>
+        Effortlessly manage and access your API keys anytime, anywhere with
+        lightning-fast performance.
+      </p>
+    </div>
+    <div class="col-md-3">
+      <i class="fa-solid fa-user-shield feature-icon"></i>
+      <h4>Privacy First</h4>
+      <p>
+        Your data is private and never shared. Only you have access to your
+        stored API keys.
+      </p>
+    </div>
+  </div>
 </section>
 
 <section class="bg-light py-5">
-    <div class="container text-center">
-        <h2 class="mb-4">How It Works</h2>
-        <div class="row">
-            <div class="col-md-3">
-                <i class="fa-solid fa-user-plus how-icon"></i>
-                <h4>1. Sign Up</h4>
-                <p>Create a free account and log in to start using EnvPorter.</p>
-            </div>
-            <div class="col-md-3">
-                <i class="fa-solid fa-key how-icon"></i>
-                <h4>2. Store Your Keys</h4>
-                <p>Securely add and manage all your API keys in one place.</p>
-            </div>
-            <div class="col-md-3">
-                <i class="fa-solid fa-cloud-download how-icon"></i>
-                <h4>3. Export as .env</h4>
-                <p>Download your API keys in a structured .env file for different technologies.</p>
-            </div>
-            <div class="col-md-3">
-                <i class="fa-solid fa-handshake how-icon"></i>
-                <h4>4. Integrate with Projects</h4>
-                <p>Use your exported .env file easily in your development workflow.</p>
-            </div>
-        </div>
+  <div class="container text-center">
+    <h2 class="mb-4">How It Works</h2>
+    <div class="row">
+      <div class="col-md-3">
+        <i class="fa-solid fa-user-plus how-icon"></i>
+        <h4>1. Sign Up</h4>
+        <p>Create a free account and log in to start using EnvPorter.</p>
+      </div>
+      <div class="col-md-3">
+        <i class="fa-solid fa-key how-icon"></i>
+        <h4>2. Store Your Keys</h4>
+        <p>Securely add and manage all your API keys in one place.</p>
+      </div>
+      <div class="col-md-3">
+        <i class="fa-solid fa-cloud-download how-icon"></i>
+        <h4>3. Export as .env</h4>
+        <p>
+          Download your API keys in a structured .env file for different
+          technologies.
+        </p>
+      </div>
+      <div class="col-md-3">
+        <i class="fa-solid fa-handshake how-icon"></i>
+        <h4>4. Integrate with Projects</h4>
+        <p>Use your exported .env file easily in your development workflow.</p>
+      </div>
     </div>
+  </div>
 </section>
 
 <section class="text-center my-5">
-    <h2>Start Managing Your API Keys Securely</h2>
-    {% if current_user.is_authenticated %}
-    <a href="/home" class="btn btn-primary btn-lg mt-3">Start</a>
-    {% else %}
-    <a href="/register" class="btn btn-primary btn-lg mt-3">Sign Up Now</a>
-    {% endif %}
-    
+  <h2>Start Managing Your API Keys Securely</h2>
+  {% if current_user.is_authenticated %}
+  <a href="/home" class="btn btn-primary btn-lg mt-3">Start</a>
+  {% else %}
+  <a href="/register" class="btn btn-primary btn-lg mt-3">Sign Up Now</a>
+  {% endif %}
 </section>
 
 <footer>
-    <p>&copy; 2025 EnvPorter. All rights reserved.</p>
-    <p>
-        <a href="/privacy">Privacy Policy</a> | 
-        <a href="/terms">Terms of Service</a> | 
-        <a href="/contact">Contact Us</a>
-    </p>
+  <p>&copy; 2025 EnvPorter. All rights reserved.</p>
+  <p>
+    <a href="/privacy">Privacy Policy</a> |
+    <a href="/terms">Terms of Service</a> |
+    <a href="/contact">Contact Us</a>
+  </p>
 </footer>
 
 {% endblock %}

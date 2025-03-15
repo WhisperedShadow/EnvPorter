@@ -1,7 +1,14 @@
-{% extends 'base.html' %}
-{% block title %}Edit{% endblock %}
-
-{% block body %}
+{% extends 'base.html' %} {% block title %}Edit - {{base.base_name }}{% endblock
+%} {% block head %}
+<meta
+  name="description"
+  content="Edit and update your environment variable keys easily with EnvPorter’s secure management system."
+/>
+<meta
+  name="keywords"
+  content="edit env, update environment variable, modify keys, EnvPorter edit"
+/>
+{% endblock %} {% block body %}
 
 <div class="container mt-4">
   <div class="d-flex align-items-center mb-3">
@@ -57,7 +64,11 @@
       {% endfor %}
 
       <div class="d-flex gap-2 mt-3">
-        <button type="button" class="btn btn-outline-primary" onclick="newsec(event)">
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          onclick="newsec(event)"
+        >
           <i class="fa fa-plus"></i> Add
         </button>
         <input type="submit" class="btn btn-primary" value="Save Changes" />

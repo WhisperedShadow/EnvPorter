@@ -10,6 +10,15 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     />
 
+    <meta
+      name="description"
+      content="Create an EnvPorter account to start managing and exporting your environment variables securely."
+    />
+    <meta
+      name="keywords"
+      content="register, sign up, create account, EnvPorter sign up, secure environment management"
+    />
+
     <style>
       * {
         margin: 0;
@@ -24,7 +33,7 @@
         justify-content: center;
         height: 100vh;
         width: 100vw;
-        overflow: hidden; 
+        overflow: hidden;
       }
 
       .signup-container {
@@ -46,7 +55,7 @@
     <div class="signup-container">
       <h2 class="text-center text-primary">EnvPorter Signup</h2>
       <p class="text-center text-muted">Create your EnvPorter account</p>
-      
+
       <form action="/register" method="post">
         <div class="mb-3">
           <label class="form-label fw-bold">Username</label>
@@ -93,28 +102,31 @@
         <button type="submit" class="btn btn-primary w-100">Signup</button>
 
         <div class="text-center mt-3">
-          <a href="/login" class="text-decoration-none">Already have an account? Login</a>
+          <a href="/login" class="text-decoration-none"
+            >Already have an account? Login</a
+          >
         </div>
       </form>
     </div>
 
     <script>
-      document.getElementById("togglePassword").addEventListener("click", function () {
-        const passwordInput = document.getElementById("password");
-        const icon = document.getElementById("iconPassword");
-        if (passwordInput.type === "password") {
-          passwordInput.type = "text";
-          icon.classList.replace("fa-eye", "fa-eye-slash");
-        } else {
-          passwordInput.type = "password";
-          icon.classList.replace("fa-eye-slash", "fa-eye");
-        }
-      });
+      document
+        .getElementById("togglePassword")
+        .addEventListener("click", function () {
+          const passwordInput = document.getElementById("password");
+          const icon = document.getElementById("iconPassword");
+          if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            icon.classList.replace("fa-eye", "fa-eye-slash");
+          } else {
+            passwordInput.type = "password";
+            icon.classList.replace("fa-eye-slash", "fa-eye");
+          }
+        });
     </script>
 
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"
       crossorigin="anonymous"
