@@ -16,22 +16,20 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f'User <{self.username}>'
 
-
 class KeyBase(db.Model):
     __tablename__ = "bases"
 
     base_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    base_name = db.Column(db.String(100), unique=True, nullable=False)
+    base_name = db.Column(db.String(100), nullable=False)
 
     keys = db.relationship('Keys', backref='base', lazy=True)
 
     def __repr__(self):
         return f'KeyBase <{self.base_name}>'
 
-
 class Keys(db.Model):
-    __tablename__ = "keys"
+    __tablename__ = "api_keys"
 
     id = db.Column(db.Integer, primary_key=True)
     base_id = db.Column(db.Integer, db.ForeignKey('bases.base_id'), nullable=False)

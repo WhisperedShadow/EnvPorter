@@ -55,10 +55,21 @@
         <form action="/register" method="post">
             <input type="text" name="username" placeholder="Username" required>
             <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="password" placeholder="Password..." id="password" required 
+       minlength="8" 
+       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+       title="Password must be at least 8 characters long, including 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.">
+       <input type="checkbox" id="togglePassword"> Show Password
             <input type="submit" value="Signup">
             <a href="/login">Already have an account?</a>
         </form>
     </div>
+
+    <script>
+        document.getElementById("togglePassword").addEventListener("change", function() {
+            const passwordInput = document.getElementById("password");
+            passwordInput.type = this.checked ? "text" : "password";
+        });
+    </script>
 </body>
 </html></form></div>

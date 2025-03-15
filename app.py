@@ -3,10 +3,15 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from database import db, User, KeyBase, Keys
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
+
 app.config['SECRET_KEY'] = "Arandomsecretkey"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("SQL_LINK")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
@@ -142,33 +147,6 @@ def edit(base_id):
         return redirect(url_for('index'))
         
     return render_template('edit.html', base=base, keys=keys)
-
-@app.route('/export', methods=['GET', 'POST'])
-@login_required
-def export():
-    bases = KeyBase.query.filter_by(user_id=current_user.id).all()
-
-    if request.method == 'POST':
-        selected_bases = request.form.getlist('base')  
-        prefix = request.form.get('prefix', '') 
-        keys = Keys.query.filter(Keys.base_id.in_(selected_bases)).all()
-        formatted_keys = []
-        for key in keys:
-            keyname = key.keyname.upper()
-            if prefix == "react":
-                keyname = f"REACT_APP_{keyname}"
-            elif prefix == "vite":
-                keyname = f"VITE_{keyname}"
-            formatted_keys.append(f"{keyname}={key.key}")
-        env_content = "\n".join(formatted_keys)
-        return Response(
-            env_content,
-            mimetype="text/plain",
-            headers={"Content-Disposition": "attachment; filename=.env"}
-        )
-
-    return render_template('export.html', bases=bases)
-
 
 if __name__ == '__main__':
     app.run(debug=True)
