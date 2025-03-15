@@ -180,6 +180,7 @@ def export():
         formatted_keys = []
         for key in keys:
             keyname = key.keyname.upper()
+            keyname=keyname.replace(" ", "_")
             if prefix == "react":
                 keyname = f"REACT_APP_{keyname}"
             elif prefix == "vite":
