@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from database import db, User, KeyBase, Keys
+from datetime import datetime
 from ourmail import send_mail
 import os
 from dotenv import load_dotenv
@@ -24,6 +25,20 @@ login_manager.login_message = 'You need to be logged in to access this page'
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+def get_current_date():
+    return datetime.utcnow().strftime("%Y-%m-%d")
+
+pages = [
+    { "url": "/", "priority": "1.0" },
+    { "url": "/home", "priority": "0.9" },
+    { "url": "/new", "priority": "0.7" },
+    { "url": "/edit/*", "priority": "0.7" },
+    { "url": "/login", "priority": "0.8" },
+    { "url": "/register", "priority": "0.8" },
+    { "url": "/export", "priority": "0.9" },
+]
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -199,23 +214,25 @@ def contact():
         return redirect(url_for('index'))
     return render_template('contact.html')
 
-from flask import Response
-from urllib.parse import urljoin
+@app.route("/sitemap.xml")
+def generate_sitemap():
+    current_date = get_current_date()
 
-@app.route('/sitemap.xml')
-def sitemap():
-    base_url = request.host_url
-    pages = [
-        '', 'home', 'login', 'register', 'new', 'export', 
-        'privacy', 'terms', 'contact'
-    ]
-    xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
-    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    sitemap_content = f"""<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    """
     for page in pages:
-        xml += f"  <url>\n    <loc>{urljoin(base_url, page)}</loc>\n  </url>\n"
-    xml += '</urlset>'
-    return Response(xml, mimetype='application/xml')
+        sitemap_content += f"""
+        <url>
+            <loc>https://env-porter.vercel.app/{page['url']}</loc>
+            <lastmod>{current_date}</lastmod>
+            <changefreq>monthly</changefreq>
+            <priority>{page['priority']}</priority>
+        </url>
+        """
+    sitemap_content += "\n</urlset>"
 
+    return Response(sitemap_content, mimetype="application/xml")
 
 if __name__ == '__main__':
     app.run(debug=True)
