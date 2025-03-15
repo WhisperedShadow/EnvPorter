@@ -40,7 +40,7 @@
     <div class="container">
         <h1 class="display-4">Manage & Export Your API Keys with Ease</h1>
         <p class="lead">Store your API keys securely and export them as .env files for different technologies.</p>
-        <a href="/register" class="btn btn-light btn-lg mt-3">Get Started</a>
+        <a href="{{ '/home' if current_user.is_authenticated else '/register' }}" class="btn btn-light btn-lg mt-3">Get Started</a>
     </div>
 </section>
 
