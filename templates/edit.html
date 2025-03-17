@@ -112,6 +112,11 @@
 
     form.insertBefore(section, document.querySelector(".d-flex"));
   };
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey && e.key === "Enter") {
+      newsec(e);
+    }
+  });
 </script>
 
 {% endblock %}

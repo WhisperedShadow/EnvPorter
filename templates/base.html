@@ -152,8 +152,15 @@
       const popup = document.querySelector(".popup");
 
       if (user) {
-        user.addEventListener("click", () => {
+        user.addEventListener("click", (event) => {
+          event.stopPropagation(); 
           popup.classList.toggle("show-popup");
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!popup.contains(event.target) && event.target !== user) {
+            popup.classList.remove("show-popup");
+          }
         });
       }
     </script>

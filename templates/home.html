@@ -1,24 +1,23 @@
-{% extends 'base.html' %} 
-{% block title %} The Main Page {% endblock %} 
+{% extends 'base.html' %} {% block title %} The Main Page {% endblock %} {%
+block head %}
+<meta
+  name="description"
+  content="EnvPorter helps you securely manage and export environment variables for your applications with ease."
+/>
+<meta
+  name="keywords"
+  content="EnvPorter, environment variables, export env, manage env, dotenv, .env manager, config management"
+/>
 
-{% block head %} 
-<meta name="description" content="EnvPorter helps you securely manage and export environment variables for your applications with ease.">
-<meta name="keywords" content="EnvPorter, environment variables, export env, manage env, dotenv, .env manager, config management">
-
-{% endblock %} 
-
-{% block body %}
+{% endblock %} {% block body %}
 
 <div class="container mt-4">
   <div class="table-responsive">
     <table class="table table-bordered table-hover">
-      
       <tbody>
         {% for base in bases %}
         <tr>
-          <td>
-            <i class="fa-solid fa-database"></i> {{ base.base_name }}
-          </td>
+          <td><i class="fa-solid fa-database"></i> {{ base.base_name }}</td>
           <td>
             <a href="/edit/{{ base.base_id }}" class="btn btn-warning btn-sm">
               <i class="fa-solid fa-pen"></i> Edit
@@ -30,7 +29,7 @@
             </a>
           </td>
         </tr>
-        
+
         {% endfor %}
         <tr>
           <td></td>
@@ -45,5 +44,13 @@
     </table>
   </div>
 </div>
+
+<script>
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey && e.key === "Enter") {
+      window.location.href = "/new";
+    }
+  });
+</script>
 
 {% endblock %}

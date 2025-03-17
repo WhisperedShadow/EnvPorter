@@ -103,6 +103,12 @@
 
     container.appendChild(section);
   };
+
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey && e.key === "Enter") {
+      newsec(e);
+    }
+  });
 </script>
 
 {% endblock %}

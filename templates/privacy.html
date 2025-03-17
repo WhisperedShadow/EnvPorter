@@ -1,60 +1,94 @@
-{% extends 'base.html' %}
-
-{% block title %}Privacy Policy - EnvPorter{% endblock %}
-
-
-{% block head %}
+{% extends 'base.html' %} {% block title %}Privacy Policy - EnvPorter{% endblock
+%} {% block head %}
 <style>
-    .privacy-section {
-        max-width: 800px;
-        margin: auto;
-        padding: 40px 20px;
-    }
+  .privacy-section {
+    max-width: 800px;
+    margin: auto;
+    padding: 40px 20px;
+  }
 </style>
-<meta name="description" content="Read EnvPorter’s privacy policy to understand how we handle and protect your data.">
-<meta name="keywords" content="privacy policy, EnvPorter privacy, data security, user data protection">
-{% endblock %}
-
-{% block body %}
+<meta
+  name="description"
+  content="Read EnvPorter’s privacy policy to understand how we handle and protect your data."
+/>
+<meta
+  name="keywords"
+  content="privacy policy, EnvPorter privacy, data security, user data protection"
+/>
+{% endblock %} {% block body %}
 
 <section class="privacy-section">
-    <h1 class="text-center">Privacy Policy</h1>
-    <p class="text-muted text-center">Last Updated: March 2025</p>
-    
-    <h2>1. Introduction</h2>
-    <p>Welcome to EnvPorter! Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your information when you use our platform.</p>
-    
-    <h2>2. Information We Collect</h2>
-    <h4>2.1 Personal Information</h4>
-    <p>When you create an account, we collect your name, email address, and other necessary details.</p>
-    
-    <h4>2.2 API Keys</h4>
-    <p>Your API keys are stored directly in our database. We do not use encryption methods, so ensure you handle them with care.</p>
-    
-    <h4>2.3 Usage Data</h4>
-    <p>We may collect information on how you use our service, such as login times and feature usage, to improve our platform.</p>
-    
-    <h2>3. How We Use Your Information</h2>
-    <ul>
-        <li>To provide and maintain our service.</li>
-        <li>To enhance security and prevent unauthorized access.</li>
-        <li>To improve our platform based on user feedback.</li>
-    </ul>
-    
-    <h2>4. How We Protect Your Data</h2>
-    <p>We take reasonable precautions to protect your personal data, but API keys are stored as plain text. Users should take additional security measures on their end.</p>
-    
-    <h2>5. Third-Party Services</h2>
-    <p>We do not sell or share your data with third parties. However, we may use trusted third-party services for authentication and analytics.</p>
-    
-    <h2>6. Your Rights</h2>
-    <p>You can update or delete your data anytime from your account settings. If you wish to remove all stored data, contact our support team.</p>
-    
-    <h2>7. Changes to This Privacy Policy</h2>
-    <p>We may update this policy as needed. Any changes will be reflected on this page.</p>
-    
-    <h2>8. Contact Us</h2>
-    <p>If you have any questions regarding this Privacy Policy, feel free to contact us at <a href="contact">contact page</a>.</p>
+  <div class="d-flex align-items-center mb-3">
+    <a href="javascript:history.back()" class="text-decoration-none text-dark">
+      <i class="fa-solid fa-arrow-left fs-4"></i>
+    </a>
+    <h2 class="text-primary ms-3 mb-0">Privacy Policy</h2>
+  </div>
+
+  <p class="text-muted text-center">Last Updated: March 2025</p>
+  <h2>1. Introduction</h2>
+  <p>
+    Welcome to EnvPorter! Your privacy is important to us. This Privacy Policy
+    explains how we collect, use, and protect your information when you use our
+    platform.
+  </p>
+
+  <h2>2. Information We Collect</h2>
+  <h4>2.1 Personal Information</h4>
+  <p>
+    When you create an account, we collect your name, email address, and other
+    necessary details.
+  </p>
+
+  <h4>2.2 API Keys</h4>
+  <p>
+    Your API keys are stored directly in our database. We do not use encryption
+    methods, so ensure you handle them with care.
+  </p>
+
+  <h4>2.3 Usage Data</h4>
+  <p>
+    We may collect information on how you use our service, such as login times
+    and feature usage, to improve our platform.
+  </p>
+
+  <h2>3. How We Use Your Information</h2>
+  <ul>
+    <li>To provide and maintain our service.</li>
+    <li>To enhance security and prevent unauthorized access.</li>
+    <li>To improve our platform based on user feedback.</li>
+  </ul>
+
+  <h2>4. How We Protect Your Data</h2>
+  <p>
+    We take reasonable precautions to protect your personal data, but API keys
+    are stored as plain text. Users should take additional security measures on
+    their end.
+  </p>
+
+  <h2>5. Third-Party Services</h2>
+  <p>
+    We do not sell or share your data with third parties. However, we may use
+    trusted third-party services for authentication and analytics.
+  </p>
+
+  <h2>6. Your Rights</h2>
+  <p>
+    You can update or delete your data anytime from your account settings. If
+    you wish to remove all stored data, contact our support team.
+  </p>
+
+  <h2>7. Changes to This Privacy Policy</h2>
+  <p>
+    We may update this policy as needed. Any changes will be reflected on this
+    page.
+  </p>
+
+  <h2>8. Contact Us</h2>
+  <p>
+    If you have any questions regarding this Privacy Policy, feel free to
+    contact us at <a href="contact">contact page</a>.
+  </p>
 </section>
 
 {% endblock %}
