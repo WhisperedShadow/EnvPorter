@@ -178,21 +178,28 @@ def export():
         prefix = request.form.get('prefix', '') 
         keys = Keys.query.filter(Keys.base_id.in_(selected_bases)).all()
         formatted_keys = []
+        
         for key in keys:
-            keyname = key.keyname.upper()
-            keyname=keyname.replace(" ", "_")
-            base = KeyBase.query.filter_by(base_id=key.base_id).first().upper()
+            keyname = key.keyname.upper().replace(" ", "_")
+            base_obj = KeyBase.query.filter_by(base_id=key.base_id).first()
+            base = base_obj.base_name.upper() if base_obj else "UNKNOWN" 
+            
             if prefix == "react":
                 keyname = f"REACT_APP_{base}_{keyname}"
             elif prefix == "vite":
                 keyname = f"VITE_{base}_{keyname}"
+            else:
+                keyname = f'{base}_{keyname}'
+            
             formatted_keys.append(f"{keyname}={key.key}")
+
         env_content = "\n".join(formatted_keys)
         return Response(
             env_content,
             mimetype="text/plain",
             headers={"Content-Disposition": "attachment; filename=.env"}
         )
+
 
     return render_template('export.html', bases=bases)
 
