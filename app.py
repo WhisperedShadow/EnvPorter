@@ -173,23 +173,43 @@ def edit(base_id):
 def export():
     bases = KeyBase.query.filter_by(user_id=current_user.id).all()
 
+    prefix_map = {
+        "react": "REACT_APP_",
+        "vite": "VITE_",
+        "next": "NEXT_PUBLIC_",
+        "gatsby": "GATSBY_",
+        "angular": "NG_APP_",
+        "svelte": "PUBLIC_",
+        "nuxt": "NUXT_PUBLIC_",
+        "vue": "VUE_APP_",  
+        "vue-vite": "VITE_",  
+        "expo": "EXPO_PUBLIC_",
+        "dotnet": "DOTNET_",
+        "electron": "ELECTRON_",
+        "terraform": "TF_VAR_",
+        "aws-cdk": "CDK_",
+        "docker": "DOCKER_",
+        "ansible": "ANSIBLE_",
+    }
+
     if request.method == 'POST':
         selected_bases = request.form.getlist('base')  
-        prefix = request.form.get('prefix', '') 
+        prefix_key = request.form.get('prefix', '')  
+        prefix_value = prefix_map.get(prefix_key, "")  
+
         keys = Keys.query.filter(Keys.base_id.in_(selected_bases)).all()
         formatted_keys = []
-        
+
         for key in keys:
             keyname = key.keyname.upper().replace(" ", "_")
             base_obj = KeyBase.query.filter_by(base_id=key.base_id).first()
-            base = base_obj.base_name.upper() if base_obj else "UNKNOWN" 
-            
-            if prefix == "react":
-                keyname = f"REACT_APP_{base}_{keyname}"
-            elif prefix == "vite":
-                keyname = f"VITE_{base}_{keyname}"
+            base = base_obj.base_name.upper() if base_obj else "UNKNOWN"  
+
+           
+            if prefix_value:
+                keyname = f"{prefix_value}{base}_{keyname}"
             else:
-                keyname = f'{base}_{keyname}'
+                keyname = f"{base}_{keyname}"
             
             formatted_keys.append(f"{keyname}={key.key}")
 
@@ -200,8 +220,7 @@ def export():
             headers={"Content-Disposition": "attachment; filename=.env"}
         )
 
-
-    return render_template('export.html', bases=bases)
+    return render_template('export.html', bases=bases, prefix_map=prefix_map)
 
 @app.route('/privacy')
 def privacy():
