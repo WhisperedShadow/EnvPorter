@@ -56,6 +56,19 @@
       <h2 class="text-center text-primary">EnvPorter Signup</h2>
       <p class="text-center text-muted">Create your EnvPorter account</p>
 
+     
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ messages[0] }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endif %} {% endwith %}
+
       <form action="/register" method="post">
         <div class="mb-3">
           <label class="form-label fw-bold">Username</label>
