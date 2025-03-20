@@ -203,7 +203,7 @@ def export():
         for key in keys:
             keyname = key.keyname.upper().replace(" ", "_")
             base_obj = KeyBase.query.filter_by(base_id=key.base_id).first()
-            base = base_obj.base_name.upper() if base_obj else "UNKNOWN"  
+            base = base_obj.base_name.upper().replace(" ","_") if base_obj else "UNKNOWN"  
 
            
             if prefix_value:
