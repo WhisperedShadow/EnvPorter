@@ -173,7 +173,7 @@ def edit(base_id):
 def export():
     bases = KeyBase.query.filter_by(user_id=current_user.id).all()
 
-    prefix_map = {"none" : ""
+    prefix_map = {"none" : "",
         "react": "REACT_APP_",
         "vite": "VITE_",
         "next": "NEXT_PUBLIC_",
